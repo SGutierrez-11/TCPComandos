@@ -31,7 +31,7 @@ public class Client {
 				String line = scanner.nextLine();
 				
 				
-				Socket socket = new Socket("172.30.165.69", 6000);
+				Socket socket = new Socket("192.168.1.4", 6000);
 				System.out.println("CONECTADO");
 				
 				InputStream is = socket.getInputStream();
@@ -59,13 +59,7 @@ public class Client {
 					
 					String ans = reader.readLine();
 					System.out.println(ans);
-				}else if(line=="RTT") {
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+				}else if(line.equals("RTT")) {
 					
 					msg = scanner.nextLine();
 					
@@ -74,19 +68,17 @@ public class Client {
 					bw.flush();
 					
 					System.out.println("Esperando mensaje...");
-					String answer = reader.readLine();
+					String answer = null;
 					
+					while(answer==null) {
+						answer = reader.readLine();
+						System.out.println("Esperando mensaje...");
+					}
 					timeFinal = System.currentTimeMillis();
 					
 					System.out.println(answer+" TIME: "+ (timeFinal-timeStart));
 					
-				}else if(line=="speed"){
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+				}else if(line.equals("speed")){
 					
 					
 					msg = scanner.nextLine();
@@ -95,7 +87,12 @@ public class Client {
 					bw.flush();
 					
 					System.out.println("Esperando mensaje...");
-					String answer = reader.readLine();
+					
+					String answer = null;
+					
+					while(answer==null) {
+						answer = reader.readLine();
+					}
 					
 					timeFinal = System.currentTimeMillis();
 					

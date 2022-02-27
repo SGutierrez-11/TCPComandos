@@ -14,6 +14,7 @@ import java.net.NetworkInterface;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Scanner;
@@ -40,7 +41,7 @@ public class Server {
 				
 				
 				while(true) {
-					String msg = "";
+					
 					System.out.println("Esperando mensaje...");
 					String line = reader.readLine();
 					System.out.println(line);
@@ -48,7 +49,7 @@ public class Server {
 					InetAddress myAddress = InetAddress.getLocalHost();
 					if(line=="remoteIpconfig") { // -------------------IP-------------------
 						
-						bw.write(myAddress.getHostName()+"\n");
+						bw.write(myAddress.getHostAddress()+"\n");
 						bw.flush();
 						//System.out.println(myAddress.getHostName());
 						//System.out.println(myAddress.getHostAddress());
@@ -108,34 +109,42 @@ public class Server {
 						//System.out.println("Network prefix: "+ net.getInterfaceAddresses().get(1).getNetworkPrefixLength());
 						break;
 					}else if(line.equals("whatTimeIsIt")) {
-						LocalDate date = LocalDate.now();
+						LocalDateTime date = LocalDateTime.now();
 						bw.write(String.valueOf(date)+"\n");
 						bw.flush();
 						break;
 					}else if(line.equals("RTT")) {
-						try {
-							Thread.sleep(2000);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+						/*try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}*/
+						String msg = null;
+						while(msg==null) {
+							msg = reader.readLine();
+							
 						}
-						
-						msg = reader.readLine();
 						System.out.println(msg);
 						
 						bw.write(msg+"\n");
 						bw.flush();
 						
+						
 						break;
 					}else if(line.equals("speed")) {
-						try {
-							Thread.sleep(2000);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+						/*try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}*/
 						
-						msg = reader.readLine();
+						String msg = null;
+						while(msg==null) {
+							msg = reader.readLine();
+							
+						}
 						System.out.println(msg);
 						
 						bw.write(msg+"\n");
