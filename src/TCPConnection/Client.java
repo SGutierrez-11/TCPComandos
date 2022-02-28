@@ -31,7 +31,7 @@ public class Client {
 				String line = scanner.nextLine();
 				
 				
-				Socket socket = new Socket("192.168.1.4", 6000);
+				Socket socket = new Socket("192.168.0.13", 6000);
 				System.out.println("CONECTADO");
 				
 				InputStream is = socket.getInputStream();
@@ -42,15 +42,19 @@ public class Client {
 				if(line.equals("remoteIpconfig")) {
 					bw.write(line+"\n");
 					bw.flush();
+					
+					String ans = reader.readLine();
+					
+					System.out.println(ans);
 				}else if(line.equals("interface")) {
 					bw.write(line+"\n");
 					bw.flush();
 					
 					
 
-						String ans = reader.readLine();
-						
-							System.out.println(ans);
+					String ans = reader.readLine();
+					
+					System.out.println(ans);
 							
 					
 				}else if(line.equals("whatTimeIsIt")) {
@@ -61,6 +65,9 @@ public class Client {
 					System.out.println(ans);
 				}else if(line.equals("RTT")) {
 					
+					bw.write(line+"\n");
+					bw.flush();
+					
 					msg = scanner.nextLine();
 					
 					timeStart = System.currentTimeMillis();
@@ -70,10 +77,8 @@ public class Client {
 					System.out.println("Esperando mensaje...");
 					String answer = null;
 					
-					while(answer==null) {
-						answer = reader.readLine();
-						System.out.println("Esperando mensaje...");
-					}
+					answer = reader.readLine();
+					
 					timeFinal = System.currentTimeMillis();
 					
 					System.out.println(answer+" TIME: "+ (timeFinal-timeStart));
@@ -81,18 +86,19 @@ public class Client {
 				}else if(line.equals("speed")){
 					
 					
+					bw.write(line+"\n");
+					bw.flush();
+					
 					msg = scanner.nextLine();
+					
 					timeStart = System.currentTimeMillis();
 					bw.write(msg+"\n");
 					bw.flush();
 					
 					System.out.println("Esperando mensaje...");
-					
 					String answer = null;
 					
-					while(answer==null) {
-						answer = reader.readLine();
-					}
+					answer = reader.readLine();
 					
 					timeFinal = System.currentTimeMillis();
 					

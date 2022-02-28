@@ -47,7 +47,7 @@ public class Server {
 					System.out.println(line);
 					
 					InetAddress myAddress = InetAddress.getLocalHost();
-					if(line=="remoteIpconfig") { // -------------------IP-------------------
+					if(line.equals("remoteIpconfig")) { // -------------------IP-------------------
 						
 						bw.write(myAddress.getHostAddress()+"\n");
 						bw.flush();
@@ -114,12 +114,7 @@ public class Server {
 						bw.flush();
 						break;
 					}else if(line.equals("RTT")) {
-						/*try {
-						Thread.sleep(2000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}*/
+						
 						String msg = null;
 						while(msg==null) {
 							msg = reader.readLine();
@@ -149,7 +144,6 @@ public class Server {
 						
 						bw.write(msg+"\n");
 						bw.flush();
-						break;
 					}else {
 						break;
 					}
